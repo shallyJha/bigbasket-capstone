@@ -7,3 +7,9 @@ WHERE c.city = 'Bengaluru';
 -- 1.4.2 DISTINCT: every distinct category in products
 SELECT DISTINCT category
 FROM products;
+
+-- 1.4.3 ORDER BY + LIMIT: top 5 highest-value orders
+SELECT order_id, customer_id, product_id, amount_inr
+FROM orders
+ORDER BY amount_inr DESC
+LIMIT 5;
