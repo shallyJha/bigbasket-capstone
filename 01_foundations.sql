@@ -13,3 +13,7 @@ SELECT order_id, customer_id, product_id, amount_inr
 FROM orders
 ORDER BY amount_inr DESC
 LIMIT 5;
+
+-- 1.4.4 Alias (AS): rename an aggregate in the output
+SELECT COUNT(*) AS total_orders
+FROM orders;
