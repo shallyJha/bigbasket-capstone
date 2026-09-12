@@ -17,3 +17,8 @@ LIMIT 5;
 -- 1.4.4 Alias (AS): rename an aggregate in the output
 SELECT COUNT(*) AS total_orders
 FROM orders;
+
+-- 1.4.5 IN: orders paid via UPI or Wallet
+SELECT order_id, payment_mode, amount_inr
+FROM orders
+WHERE payment_mode IN ('UPI', 'Wallet');
