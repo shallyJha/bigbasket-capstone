@@ -22,3 +22,8 @@ FROM orders;
 SELECT order_id, payment_mode, amount_inr
 FROM orders
 WHERE payment_mode IN ('UPI', 'Wallet');
+
+-- Orders with amount_inr between 200 and 500 (inclusive)
+SELECT order_id, amount_inr
+FROM orders
+WHERE amount_inr BETWEEN 200 AND 500;
