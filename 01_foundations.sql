@@ -27,3 +27,13 @@ WHERE payment_mode IN ('UPI', 'Wallet');
 SELECT order_id, amount_inr
 FROM orders
 WHERE amount_inr BETWEEN 200 AND 500;
+
+-- Orders with amount_inr outside the same 200-500 range, for contrast
+SELECT order_id, amount_inr
+FROM orders
+WHERE amount_inr NOT BETWEEN 200 AND 500;
+
+-- Orders with no rating recorded (Cancelled and Pending never receive one)
+SELECT order_id, status, rating
+FROM orders
+WHERE rating IS NULL;
