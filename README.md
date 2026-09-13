@@ -40,7 +40,7 @@ TODO: document the exact command to run `generate_data.py` and what it produces.
 
 ## Live Tableau Public Dashboard
 
-TODO: paste the published Tableau Public link here.
+https://public.tableau.com/app/profile/shally.jha/viz/BigBasketCategoryPerformance/BigBasketCategoryPerformance
 
 ## Data Story
 
