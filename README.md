@@ -8,19 +8,19 @@ BigBasket wants to know which product categories are meeting their revenue targe
 
 All artifacts live flat in the repo root.
 
-- `generate_data.py` - script that generates the raw data.
-- `bigbasket_capstone.db` - SQLite database, produced by `generate_data.py`.
-- `orders_raw.csv` - raw orders data, produced by `generate_data.py`.
-- `products.csv` - product catalog data, produced by `generate_data.py`.
-- `01_foundations.sql` - Part 1 foundational SQL queries.
-- `02_aggregation_joins.sql` - Part 1 aggregation and join queries.
-- `03_reporting.sql` - Part 1 reporting queries.
-- `verify.sql` - verification queries used to cross check results.
-- `monthly_category_revenue.csv` - exported revenue data used in the spreadsheet and Tableau.
-- `bigbasket_capstone.xlsx` - the spreadsheet workbook (Part 2).
-- `analysis.ipynb` - the Part 4 Python notebook.
-- `ai_log.md` - log of AI assisted prompts used across the project.
-- `DATA_STORY.md` - written interpretation of the Tableau dashboard.
+- [`generate_data.py`](generate_data.py) - script that generates the raw data.
+- [`bigbasket_capstone.db`](bigbasket_capstone.db) - SQLite database, produced by `generate_data.py`.
+- [`orders_raw.csv`](orders_raw.csv) - raw orders data, produced by `generate_data.py`.
+- [`products.csv`](products.csv) - product catalog data, produced by `generate_data.py`.
+- [`01_foundations.sql`](01_foundations.sql) - Part 1 foundational SQL queries.
+- [`02_aggregation_joins.sql`](02_aggregation_joins.sql) - Part 1 aggregation and join queries.
+- [`03_reporting.sql`](03_reporting.sql) - Part 1 reporting queries.
+- [`verify.sql`](verify.sql) - verification queries used to cross check results.
+- [`monthly_category_revenue.csv`](monthly_category_revenue.csv) - exported revenue data used in the spreadsheet and Tableau.
+- [`bigbasket_capstone.xlsx`](bigbasket_capstone.xlsx) - the spreadsheet workbook (Part 2).
+- [`analysis.ipynb`](analysis.ipynb) - the Part 4 Python notebook.
+- [`ai_log.md`](ai_log.md) - log of AI assisted prompts used across the project.
+- [`DATA_STORY.md`](DATA_STORY.md) - written interpretation of the Tableau dashboard.
 - `README.md` - this file.
 
 ## How to Regenerate the Database
@@ -29,14 +29,14 @@ Run `python generate_data.py` from the repo root. It uses a fixed random seed, s
 
 ## Where the SQL Task Queries Live
 
-- Part 1 foundations: `01_foundations.sql`
-- Part 1 aggregation and joins: `02_aggregation_joins.sql`
-- Part 1 reporting: `03_reporting.sql`
-- Verification: `verify.sql`
+- Part 1 foundations: [`01_foundations.sql`](01_foundations.sql)
+- Part 1 aggregation and joins: [`02_aggregation_joins.sql`](02_aggregation_joins.sql)
+- Part 1 reporting: [`03_reporting.sql`](03_reporting.sql)
+- Verification: [`verify.sql`](verify.sql)
 
 ## Spreadsheet Workbook
 
-`bigbasket_capstone.xlsx`
+[`bigbasket_capstone.xlsx`](bigbasket_capstone.xlsx)
 
 ## Live Tableau Public Dashboard
 
@@ -44,25 +44,25 @@ View the live dashboard here: [BigBasket Category Performance](https://public.ta
 
 ## Data Story
 
-See `DATA_STORY.md`.
+See [`DATA_STORY.md`](DATA_STORY.md).
 
 ## AI Usage Log
 
-See `ai_log.md`.
+See [`ai_log.md`](ai_log.md).
 
 ## Part 4 Notebook
 
-See `analysis.ipynb`.
+See [`analysis.ipynb`](analysis.ipynb).
 
 ## Methodology
 
 ### SQL date functions on SQLite
 
-This database runs on SQLite, not BigQuery, so the SQL scripts use SQLite's own date syntax. Where BigQuery would use `EXTRACT()` and `FORMAT_DATE()`, this project uses SQLite's single `strftime()` function instead, for example `strftime('%Y-%m', order_date)` in `03_reporting.sql` to group revenue by year and month in one string. This is the same date extraction and formatting concept, just expressed in SQLite's own syntax rather than BigQuery's.
+This database runs on SQLite, not BigQuery, so the SQL scripts use SQLite's own date syntax. Where BigQuery would use `EXTRACT()` and `FORMAT_DATE()`, this project uses SQLite's single `strftime()` function instead, for example `strftime('%Y-%m', order_date)` in [`03_reporting.sql`](03_reporting.sql) to group revenue by year and month in one string. This is the same date extraction and formatting concept, just expressed in SQLite's own syntax rather than BigQuery's.
 
 ### Data cleaning choices in the notebook
 
-`analysis.ipynb` makes a few deliberate choices when cleaning `orders_raw.csv` and `products.csv`:
+[`analysis.ipynb`](analysis.ipynb) makes a few deliberate choices when cleaning [`orders_raw.csv`](orders_raw.csv) and [`products.csv`](products.csv):
 
 - Duplicate rows are removed by `order_id`, keeping the first occurrence, which brings the row count from 508 down to the expected 500.
 - `city` and `category` values are cleaned of mixed casing and stray whitespace so each has its correct number of distinct values.
@@ -78,12 +78,12 @@ This database runs on SQLite, not BigQuery, so the SQL scripts use SQLite's own 
 - Below Target, Watch: Dairy & Eggs (14,090 vs 16,500, -14.6%, just inside the watch threshold).
 - Below Target, Critical: Snacks & Beverages (10,895 vs 13,000, -16.2%), Fruits & Vegetables (9,790 vs 12,000, -18.4%, the largest shortfall).
 
-Full detail and recommendations are in `DATA_STORY.md`.
+Full detail and recommendations are in [`DATA_STORY.md`](DATA_STORY.md).
 
 ### Top category and supplier
 
-- The SQL category revenue query (`02_aggregation_joins.sql`, Delivered orders only) ranks Household Essentials first at 21,715 revenue, before any data cleaning is applied.
-- The Python notebook (`analysis.ipynb`), run on the cleaned and capped data, also ranks Household Essentials first among Delivered orders, at 20,910 revenue. The lower figure reflects the outlier capping and missing-value exclusion applied during cleaning, and the two independently agree on which category leads.
+- The SQL category revenue query ([`02_aggregation_joins.sql`](02_aggregation_joins.sql), Delivered orders only) ranks Household Essentials first at 21,715 revenue, before any data cleaning is applied.
+- The Python notebook ([`analysis.ipynb`](analysis.ipynb)), run on the cleaned and capped data, also ranks Household Essentials first among Delivered orders, at 20,910 revenue. The lower figure reflects the outlier capping and missing-value exclusion applied during cleaning, and the two independently agree on which category leads.
 - The notebook also finds HomeEssentials Traders as the top supplier by revenue, also at 20,910. This is a Python-only finding since the SQL scripts do not group revenue by supplier.
 
 ## Assumptions and Business Rules

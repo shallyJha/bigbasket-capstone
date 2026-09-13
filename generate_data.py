@@ -80,8 +80,8 @@ products_raw = [
     ("Premium Face Cream 50g", "Personal Care", "CarePlus Distributors", 450),
 ]
 # Note: "Premium Face Cream 50g" (product_id 31) is deliberately excluded from
-# popularity_weights/product_ids_weighted below, so it never receives an order —
-# this gives the Task 4(b) LEFT JOIN a genuine zero-order row to preserve.
+# popularity_weights/product_ids_weighted below, so it never receives an order,
+# this gives the LEFT JOIN query a genuine zero-order row to preserve.
 products = [(i, *p) for i, p in enumerate(products_raw, start=1)]
 cur.executemany("INSERT INTO products VALUES (?,?,?,?,?)", products)
 
@@ -149,7 +149,7 @@ cur.executemany("INSERT INTO category_targets VALUES (?,?)", category_targets)
 
 conn.commit()
 
-# --- Raw exports for Part 4 (Python/Pandas) — deliberately messy, do not "fix" here ---
+# --- Raw exports for Part 4 (Python/Pandas), deliberately messy, do not "fix" here ---
 raw_rows = []
 for o in orders:
     order_id, cust_id, prod_id, o_date, qty, amt, pm, status, rating = o
